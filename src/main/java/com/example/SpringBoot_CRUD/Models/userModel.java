@@ -4,6 +4,12 @@ public class userModel {
     private long id;
     private String username;
 
+    public userModel(long id, String username, String email) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }

@@ -20,6 +20,6 @@ public class userController {
 
     @GetMapping
     public List<userModel> getUsers(){
-        return Arrays.asList(new userModel());
+        return Arrays.asList(new userModel(1l,"joe","joe@gmail.com"));
     }
 }
