@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //Here in this entity, going to give the 2 arguments entity name, ID type that mention in entity
 public interface userRepository extends JpaRepository <userEntity,Long> {
 
-
 }

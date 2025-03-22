@@ -1,26 +1,23 @@
 package com.example.SpringBoot_CRUD.Controllers;
 
+import com.example.SpringBoot_CRUD.Entity.userEntity;
 import com.example.SpringBoot_CRUD.Models.userModel;
+import com.example.SpringBoot_CRUD.Repository.userRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
 public class userController {
 
-//    @GetMapping
-//    public String getUsers(){
-//        return "Hello World";
-//    }
+    @Autowired
+    private userRepository userRepository;
 
     @GetMapping
-    public List<userModel> getUsers(){
-        return Arrays.asList(new userModel(14l,"joe","joe@gmail.com"),new userModel(2l,"pirana","pirana@gmail.com"));
-
+    public List<userEntity> getUsers(){
+        return userRepository.findAll();
     }
 }
