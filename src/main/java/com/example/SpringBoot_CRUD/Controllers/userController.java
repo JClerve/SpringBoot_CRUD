@@ -1,12 +1,12 @@
 package com.example.SpringBoot_CRUD.Controllers;
 
 import com.example.SpringBoot_CRUD.Entity.userEntity;
+import com.example.SpringBoot_CRUD.Exception.ResourceNotFoundException;
 import com.example.SpringBoot_CRUD.Models.userModel;
 import com.example.SpringBoot_CRUD.Repository.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -19,5 +19,16 @@ public class userController {
     @GetMapping
     public List<userEntity> getUsers(){
         return userRepository.findAll();
+    }
+
+    @PostMapping
+    public userEntity createUser(@RequestBody userEntity user){
+        return userRepository.save(user);
+
+    }
+
+    @GetMapping("/{id}")
+    public userEntity getUserByID(@PathVariable long id){
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not found"));
     }
 }
