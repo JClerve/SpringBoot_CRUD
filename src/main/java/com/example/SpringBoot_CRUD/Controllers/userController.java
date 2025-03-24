@@ -31,4 +31,12 @@ public class userController {
     public userEntity getUserByID(@PathVariable long id){
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not found"));
     }
+
+    @PutMapping("/{id}")
+    public userEntity updateUser(@RequestBody userEntity user,@PathVariable long id){
+       userEntity userData = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not found"));
+        userData.setEmail(user.getEmail());
+        userData.setUsername(user.getUsername());
+        return userRepository.save(userData);
+    }
 }
