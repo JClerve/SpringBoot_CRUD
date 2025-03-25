@@ -21,17 +21,21 @@ public class userController {
         return userRepository.findAll();
     }
 
+
+    //create the user
     @PostMapping
     public userEntity createUser(@RequestBody userEntity user){
         return userRepository.save(user);
 
     }
-
+    //Get the user
     @GetMapping("/{id}")
     public userEntity getUserByID(@PathVariable long id){
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not found"));
     }
 
+
+    //Update the user
     @PutMapping("/{id}")
     public userEntity updateUser(@RequestBody userEntity user,@PathVariable long id){
        userEntity userData = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not found"));
