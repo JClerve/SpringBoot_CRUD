@@ -2,9 +2,9 @@ package com.example.SpringBoot_CRUD.Controllers;
 
 import com.example.SpringBoot_CRUD.Entity.userEntity;
 import com.example.SpringBoot_CRUD.Exception.ResourceNotFoundException;
-import com.example.SpringBoot_CRUD.Models.userModel;
 import com.example.SpringBoot_CRUD.Repository.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,4 +43,15 @@ public class userController {
         userData.setUsername(user.getUsername());
         return userRepository.save(userData);
     }
+
+    //Delete the User
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable long id){
+        userEntity userData = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User is not found"));
+        userRepository.delete(userData);
+        return ResponseEntity.ok().build();
+
+    }
+
+
 }
